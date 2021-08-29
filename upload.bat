@@ -11,7 +11,7 @@ twine upload dist/*
 
 rd /s /Q dist
 
-rd /s /Q perovskite.egg-info
+rd /s /Q ase_db_extension.egg-info
 
 pause
 
