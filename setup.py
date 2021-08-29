@@ -16,7 +16,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
 
-    name='ase_db_extendion',
+    name='ase_db_extension',
     version='0.0.01',
     keywords=['database'," structure"],
     description='database for ase.db.',
