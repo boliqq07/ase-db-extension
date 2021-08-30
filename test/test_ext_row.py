@@ -29,7 +29,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_rename(self):
         with self.db:
-            ar = atoms_row_rename(self.db, name_pair = (("space_group", "space_group2"),), check=True)
+            ar = atoms_row_rename(self.db[1], name_pair = (("space_group", "space_group2"),), check=True)
             print(ar.key_value_pairs)
             print(ar.data)
 

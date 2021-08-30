@@ -5,7 +5,7 @@ import pandas as pd
 from ase.db import connect
 
 from ase_db_extension import db_row2dct, db_dct2row, db_to_csv, db_from_ase_csv, db_from_structure_csv, db_cat, \
-    db_rename
+    db_rename, db_transform
 from ase_db_extension.ext_row import atoms_row_matcher, HashAtomsRow, atoms_row_matcher_log
 
 os.chdir("../Instance")
@@ -39,19 +39,22 @@ class MyTestCase(unittest.TestCase):
         if os.path.isfile("temp.db"):
             os.remove("temp.db")
 
-        db = db_from_ase_csv("organometal.csv",new_database_name="temp.db")
+        db = db_from_ase_csv("organometal.csv", new_database_name="temp.db")
         try:
             assert isinstance(db[1].get("space_group"),str)
             print(db[1].get("space_group"))
         except FileExistsError:
             pass
 
+        if os.path.isfile("temp.db"):
+            os.remove("temp.db")
+
     def test_from_structure_csv(self):
 
         if os.path.isfile("temp.db"):
             os.remove("temp.db")
 
-        db = db_from_structure_csv("kim_raw_data.csv",new_database_name="temp.db")
+        db = db_from_structure_csv("kim_raw_data.csv", new_database_name="temp.db",index_col=0,fmt="json")
         try:
             assert isinstance(db[1].data["Label"],str)
             print(db[1].data["Label"])
@@ -59,6 +62,9 @@ class MyTestCase(unittest.TestCase):
             pass
 
     def test_data_cat(self):
+
+        if os.path.isfile("new2.db"):
+            os.remove("new2.db")
 
         db2 = self.db
         db1 = connect("temp.db")
@@ -70,8 +76,19 @@ class MyTestCase(unittest.TestCase):
         print(ar[1].key_value_pairs)
         print(ar[1].data)
 
-
         # ar = db_rename(self.db, name_pair = (("space_group2", "space_group1"),), check = True)
+
+    def test_transform(self):
+
+        if os.path.isfile("data.json"):
+            os.remove("data.json")
+
+        db = self.db
+        new_base = db_transform(db,"data.json")
+
+        new_base = connect("data.json")
+        print(new_base[1].toatoms())
+        print(new_base[1])
 
 
 if __name__ == '__main__':
