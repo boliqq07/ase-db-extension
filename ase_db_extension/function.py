@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 from ase.db import connect
 from ase.db.core import Database, reserved_keys
-from ase.db.row import AtomsRow
+from ase.db.row import AtomsRow, atoms2dict
 from pymatgen.core import Structure
 
 from ase_db_extension.ext_row import check_name_tup, atoms_row_rename
@@ -303,14 +303,17 @@ def db_from_structure_dict(data, new_database_name="new_database.db",
                 elif isinstance(fmt, Callable):
                     atoms = fmt(structure)
                 dct = _decode_dct(datak)
-                _, new_kv, new_data = collect_dct3(dct)
+                new_dct, new_kv, new_data = collect_dct3(dct)
+                dct = atoms2dict(atoms)
+                dct.update(new_dct)
                 if pop_name is not None:
                     for i in pop_name:
                         if i in new_kv:
                             del new_kv[i]
                         elif i in new_data:
                             del new_data[i]
-                database.write(atoms, key_value_pairs=new_kv, data=new_data)
+
+                database.write(dct, key_value_pairs=new_kv, data=new_data)
             except NameError as e:
                 # except BaseException as e:
                 warnings.warn("The {} sample is can't be analysis.".format(k))
