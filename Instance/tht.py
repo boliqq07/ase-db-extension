@@ -28,4 +28,5 @@ def fmt(dct):
     return atoms
 
 
-data = db_from_structure_dict(entries, new_database_name="Thermodynamic-High-throughput.db",structure_index_name= "structure", fmt = fmt)
+data = db_from_structure_dict(entries, new_database_name="Thermodynamic-High-throughput.db",
+                              structure_index_name="structure", fmt=fmt)

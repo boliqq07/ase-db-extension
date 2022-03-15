@@ -18,7 +18,7 @@ setup(
 
     name='ase_db_extension',
     version='0.0.02',
-    keywords=['database'," structure"],
+    keywords=['database', " structure"],
     description='database for ase.db.',
     install_requires=['pandas', 'joblib', 'matplotlib', 'deprecated', "pathlib",
                       'requests', 'tqdm', "mgetool", "pymatgen", "numba", "ase"],

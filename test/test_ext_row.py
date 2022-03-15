@@ -14,8 +14,8 @@ class MyTestCase(unittest.TestCase):
 
     def test_matcher(self):
         with self.db:
-            self.assertEqual(atoms_row_matcher(self.db[1],self.db[1]),1.0)
-            self.assertLess(atoms_row_matcher(self.db[1],self.db[2]),1.0)
+            self.assertEqual(atoms_row_matcher(self.db[1], self.db[1]), 1.0)
+            self.assertLess(atoms_row_matcher(self.db[1], self.db[2]), 1.0)
 
     def test_hash(self):
         list1 = []
@@ -24,15 +24,14 @@ class MyTestCase(unittest.TestCase):
                 list1.append(HashAtomsRow.from_atomsrow(i))
             a = set(list1)
             list1.append(HashAtomsRow.from_atomsrow(HashAtomsRow.from_atomsrow(self.db[1])))
-            b= set(list1)
-            self.assertEqual(len(a),len(b))
+            b = set(list1)
+            self.assertEqual(len(a), len(b))
 
     def test_rename(self):
         with self.db:
-            ar = atoms_row_rename(self.db[1], name_pair = (("space_group", "space_group2"),), check=True)
+            ar = atoms_row_rename(self.db[1], name_pair=(("space_group", "space_group2"),), check=True)
             print(ar.key_value_pairs)
             print(ar.data)
-
 
 
 if __name__ == '__main__':

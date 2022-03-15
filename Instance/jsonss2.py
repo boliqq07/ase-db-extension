@@ -23,7 +23,6 @@ files = os.listdir()
 
 file = "d3-5-16-2021.json"
 new_file = file[:-5]
-new_file = new_file+".db"
-
+new_file = new_file + ".db"
 
 db = connect("jdft_2d-7-7-2018.db")
