@@ -23,7 +23,7 @@ class MyTestCase(unittest.TestCase):
             for i in self.db.select():
                 list1.append(HashAtomsRow.from_atomsrow(i))
             a = set(list1)
-            list1.append(HashAtomsRow.from_atomsrow(HashAtomsRow.from_atomsrow(self.db[1])))
+            list1.append(HashAtomsRow.from_atomsrow(self.db[1]))
             b = set(list1)
             self.assertEqual(len(a), len(b))
 
