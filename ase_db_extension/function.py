@@ -23,7 +23,7 @@ from ase.db.row import AtomsRow, atoms2dict
 from pymatgen.core import Structure
 
 from ase_db_extension.ext_row import check_name_tup, atoms_row_rename
-from ase_db_extension.general import aaa
+from ase_db_extension.general import _aaa as aaa
 
 reserved_keys_extend = reserved_keys
 

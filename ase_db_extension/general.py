@@ -7,4 +7,4 @@
 
 from pymatgen.io.ase import AseAtomsAdaptor
 
-aaa = AseAtomsAdaptor()
+_aaa = AseAtomsAdaptor()
